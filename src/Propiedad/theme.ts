@@ -1,10 +1,12 @@
-// Paleta sobria con acentos naranja y azul (según brief).
+// Paleta tomada del storyboard: azul marino, naranja y blanco.
 export const theme = {
-  bg: "#0b1220",
-  bgAlt: "#111a2b",
-  text: "#f5f7fa",
-  muted: "#aab4c3",
-  orange: "#f2801e",
+  bg: "#0f2a54",
+  bgAlt: "#0b1d3a",
+  navy: "#0f2a54",
+  navyDeep: "#0b1d3a",
+  text: "#ffffff",
+  muted: "#c9d3e3",
+  orange: "#f26b1d",
   blue: "#2d7ff9",
   blueDeep: "#153a73",
   font: "Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif",

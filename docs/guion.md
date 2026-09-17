@@ -31,6 +31,7 @@ nombre, cámbialo en la prop correspondiente desde Studio.
 | `render_esquina.mp4`            | `renderEsquina`            | 3      | 5 s           | Render referencial de local comercial en esquina              |
 | `presentadora_zonificacion.mp4` | `presentadoraZonificacion` | 5      | 3.3 s         | Asesora hablando a cámara                                     |
 | `render_proyecto.mp4`           | `renderProyecto`           | 5      | 2.7 s         | Render referencial de posible proyecto comercial              |
+| `documentos.mp4`                | `documentos`               | 6      | 6 s           | Documentos genéricos sobre escritorio, sin datos legibles     |
 | `presentadora_llamado.mp4`      | `presentadoraLlamado`      | 7      | 6 s           | Asesora caminando / hablando en entorno inmobiliario moderno  |
 | `render_llamado.mp4`            | `renderLlamado`            | 7      | 1.7 s         | Render referencial breve                                      |
 | `atardecer.mp4`                 | `atardecer`                | 8      | 2.7 s         | Vista cinematográfica de Cerro Colorado al atardecer          |

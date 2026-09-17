@@ -39,7 +39,7 @@ export const PanelStoryboard: React.FC<Props> = ({ storyboard, indice }) => {
   );
 
   return (
-    <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", overflow: "hidden" }}>
+    <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", overflow: "hidden", paddingBottom: 170 }}>
       {/* Fondo: el mismo panel, ampliado y desenfocado */}
       <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
         <Recorte escala={escala * 2.4} estilo={{ filter: "blur(40px) brightness(0.55)", transform: `scale(${zoom})` }} />

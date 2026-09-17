@@ -1,6 +1,6 @@
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { siExiste } from "./archivos";
-import { Marca } from "./components/Marca";
+import { Footer } from "./components/Footer";
 import { PanelStoryboard } from "./components/PanelStoryboard";
 import { Referencial } from "./components/Referencial";
 import { SceneShell } from "./components/SceneShell";
@@ -31,6 +31,8 @@ const ESCENAS = [
 // Video promocional vertical 9:16, 45 s, 8 escenas contiguas.
 // Paneles del storyboard que son renders/fachadas: llevan aviso referencial.
 const PANELES_REFERENCIALES = new Set([2, 4, 6]);
+// Escenas cuyo diálogo ya está escrito en pantalla.
+const SIN_SUBTITULO = new Set([5, 7]);
 
 // Si la imagen de storyboard existe en /public se muestra el panel
 // correspondiente en lugar de la escena diseñada (modo animatic).
@@ -59,8 +61,8 @@ export const PropiedadCerroColorado: React.FC<PropiedadProps> = (props) => {
           )}
         </Sequence>
       ))}
-      {props.mostrarSubtitulos ? <Subtitulos /> : null}
-      <Marca asesora={props.asesora} ubicacion={props.ubicacion} />
+      {props.mostrarSubtitulos ? <Subtitulos ocultarEn={usarStoryboard ? undefined : SIN_SUBTITULO} /> : null}
+      <Footer />
     </AbsoluteFill>
   );
 };
