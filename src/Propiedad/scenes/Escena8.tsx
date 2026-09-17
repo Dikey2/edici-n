@@ -2,13 +2,11 @@ import { AbsoluteFill, Sequence } from "remotion";
 import { Contacto } from "../components/Contacto";
 import { MediaSlot } from "../components/MediaSlot";
 import { SceneShell } from "../components/SceneShell";
-import { Subtitulo } from "../components/Subtitulo";
 import { Linea, Titulo } from "../components/Texto";
-import { DIALOGO } from "../guion";
 import type { PropiedadProps } from "../schema";
 
 // 0:39 – 0:45  Cierre al atardecer, asesora en plano medio y contacto.
-export const Escena8: React.FC<PropiedadProps> = ({ clips, asesora, whatsapp, ubicacion, mostrarSubtitulos }) => (
+export const Escena8: React.FC<PropiedadProps> = ({ clips, asesora, whatsapp, ubicacion }) => (
   <SceneShell>
     <Sequence durationInFrames={80} premountFor={30}>
       <MediaSlot src={clips.atardecer} kind="atardecer" etiqueta="atardecer.mp4" oscurecer={0.5} />
@@ -27,6 +25,5 @@ export const Escena8: React.FC<PropiedadProps> = ({ clips, asesora, whatsapp, ub
         <Contacto asesora={asesora} whatsapp={whatsapp} ubicacion={ubicacion} delay={30} />
       </div>
     </AbsoluteFill>
-    {mostrarSubtitulos ? <Subtitulo texto={DIALOGO.s8(asesora, whatsapp)} delay={85} /> : null}
   </SceneShell>
 );

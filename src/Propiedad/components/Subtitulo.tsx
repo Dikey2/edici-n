@@ -1,16 +1,20 @@
-import { interpolate, useCurrentFrame } from "remotion";
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { LINEAS } from "../guion";
 import { theme } from "../theme";
 
-// Subtítulo del diálogo, en la parte baja de la pantalla.
-export const Subtitulo: React.FC<{ readonly texto: string; readonly delay?: number }> = ({
-  texto,
-  delay = 6,
-}) => {
+// Subtítulos de la narración, sincronizados con narracion/tiempos.json.
+export const Subtitulos: React.FC = () => {
   const frame = useCurrentFrame();
-  const opacity = interpolate(frame, [delay, delay + 10], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const { fps } = useVideoConfig();
+  const t = frame / fps;
+  const linea = LINEAS.find((l) => t >= l.inicio && t < l.fin);
+  if (!linea) return null;
+  const opacity = interpolate(
+    t,
+    [linea.inicio, linea.inicio + 0.25, linea.fin - 0.25, linea.fin],
+    [0, 1, 1, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+  );
   return (
     <div
       style={{
@@ -31,7 +35,7 @@ export const Subtitulo: React.FC<{ readonly texto: string; readonly delay?: numb
         fontFamily: theme.font,
       }}
     >
-      {texto}
+      {linea.subtitulo}
     </div>
   );
 };

@@ -1,13 +1,11 @@
 import { AbsoluteFill, Sequence } from "remotion";
 import { MediaSlot } from "../components/MediaSlot";
 import { SceneShell } from "../components/SceneShell";
-import { Subtitulo } from "../components/Subtitulo";
 import { Titulo } from "../components/Texto";
-import { DIALOGO } from "../guion";
 import type { PropiedadProps } from "../schema";
 
 // 0:00 – 0:05  Toma aérea con el Misti; la asesora aparece brevemente.
-export const Escena1: React.FC<PropiedadProps> = ({ clips, mostrarSubtitulos }) => (
+export const Escena1: React.FC<PropiedadProps> = ({ clips }) => (
   <SceneShell>
     <Sequence durationInFrames={95} premountFor={30}>
       <MediaSlot src={clips.dronIntro} kind="dron" etiqueta="dron_intro.mp4" />
@@ -20,6 +18,5 @@ export const Escena1: React.FC<PropiedadProps> = ({ clips, mostrarSubtitulos }) 
         ¿Buscas una propiedad con ubicación estratégica en Cerro Colorado?
       </Titulo>
     </AbsoluteFill>
-    {mostrarSubtitulos ? <Subtitulo texto={DIALOGO.s1} /> : null}
   </SceneShell>
 );

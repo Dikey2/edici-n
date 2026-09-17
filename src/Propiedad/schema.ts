@@ -4,6 +4,8 @@ import { z } from "zod";
 // de posición estilizado hasta que el clip esté disponible.
 const archivo = z.string().nullable();
 
+const panel = z.object({ x: z.number(), y: z.number(), w: z.number(), h: z.number() });
+
 export const propiedadSchema = z.object({
   asesora: z.string(),
   whatsapp: z.string(),
@@ -14,6 +16,14 @@ export const propiedadSchema = z.object({
   mostrarSubtitulos: z.boolean(),
   // Narración completa (mp3/wav en /public). null = sin audio.
   voz: archivo,
+  // Modo storyboard: una sola imagen con los 8 paneles (2 columnas × 4 filas)
+  // en /public. Cada escena recorta su panel. null = escenas diseñadas.
+  storyboard: z.object({
+    archivo: archivo,
+    ancho: z.number(),
+    alto: z.number(),
+    paneles: z.array(panel).length(8),
+  }),
   clips: z.object({
     dronIntro: archivo,
     presentadoraIntro: archivo,
@@ -38,7 +48,23 @@ export const defaultProps: PropiedadProps = {
   areaTechada: "411.45 m²",
   via: "Autopista Arequipa – La Joya",
   mostrarSubtitulos: true,
-  voz: null,
+  voz: "narracion.mp3",
+  storyboard: {
+    archivo: null,
+    ancho: 900,
+    alto: 1600,
+    // Estimación para la imagen de referencia de 900×1600; ajústalo en Studio.
+    paneles: [
+      { x: 0, y: 0, w: 447, h: 420 },
+      { x: 453, y: 0, w: 447, h: 420 },
+      { x: 0, y: 428, w: 447, h: 347 },
+      { x: 453, y: 428, w: 447, h: 347 },
+      { x: 0, y: 783, w: 447, h: 314 },
+      { x: 453, y: 783, w: 447, h: 314 },
+      { x: 0, y: 1105, w: 447, h: 350 },
+      { x: 453, y: 1105, w: 447, h: 350 },
+    ],
+  },
   clips: {
     dronIntro: null,
     presentadoraIntro: null,

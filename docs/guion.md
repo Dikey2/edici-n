@@ -39,6 +39,64 @@ un clip no exista, se muestra un marcador de posición con la etiqueta
 Formatos aceptados: `.mp4`, `.webm`, `.mov` (video) o `.png`, `.jpg` (imagen fija
 con movimiento lento). Los clips se reproducen sin audio; la voz va en `voz`.
 
+## Narración
+
+El texto de cada escena vive en `narracion/guion.json` (campo `tts` para la
+voz, `subtitulo` para pantalla). `public/narracion.mp3` es una **voz de
+prueba** generada offline con Piper (voz es_ES-sharvard, locutora femenina,
+acento peninsular) para validar ritmo y sincronía; para la pieza final graba
+o genera una voz latina de calidad comercial con el mismo texto.
+
+`scripts/narracion.py` monta la narración completa: sintetiza (o recibe) un
+audio por escena, lo coloca al inicio de su escena (o justo después de la
+frase anterior si esta se alargó), recorta silencios y escribe:
+
+- `public/narracion.mp3` (vía `narracion.wav`),
+- `public/narracion.srt` (subtítulos estándar),
+- `narracion/tiempos.json`, que el video usa para mostrar cada subtítulo
+  exactamente mientras suena su frase.
+
+```bash
+pip install piper-tts
+python3 scripts/narracion.py --modelo es_ES-sharvard-medium.onnx --hablante 1 --velocidad 0.72
+npx remotion ffmpeg -y -i public/narracion.wav public/narracion.mp3
+
+# Con una voz comercial: exporta 8 archivos wav, uno por escena, y solo monta
+python3 scripts/narracion.py --wavs e1.wav e2.wav e3.wav e4.wav e5.wav e6.wav e7.wav e8.wav
+```
+
+Tiempos medidos de la voz de prueba (la narración termina a los 44.95 s):
+
+| Escena | Voz            | Frase |
+|--------|----------------|-------|
+| 1      | 0.30 – 5.73 s  | Si estás buscando una propiedad con una ubicación estratégica en Cerro Colorado, quiero mostrarte esta oportunidad. |
+| 2      | 6.03 – 10.21 s | Cuatrocientos once metros cuadrados en esquina, con frente directo a la Autopista Arequipa – La Joya. |
+| 3      | 10.51 – 13.02 s| Con construcción existente y la misma área techada. |
+| 4      | 15.20 – 18.38 s| Con agua, luz, desagüe, pistas asfaltadas, veredas y telefonía. |
+| 5      | 21.20 – 26.82 s| La tasación consigna zonificación de Comercio Especializado, lo que permite evaluar distintas posibilidades para un proyecto. |
+| 6      | 27.20 – 29.20 s| Además, cuenta con documentación registral. |
+| 7      | 33.20 – 39.41 s| Si eres empresario, inversionista o estás buscando un espacio para desarrollar tu próximo proyecto, esta propiedad merece ser conocida. |
+| 8      | 39.71 – 44.95 s| Soy Gianela Torres. Escríbeme al 978 308 489 y coordinamos una visita. |
+
+Las frases obligatorias del brief (escenas 1, 5, 7 y 8) se mantienen
+literales; las demás solo leen lo que ya aparece en pantalla. Ninguna añade
+usos, cifras ni datos no proporcionados.
+
+## Modo storyboard (animatic)
+
+Si tienes la imagen de storyboard (8 paneles en 2 columnas × 4 filas),
+guárdala en `public/` (p. ej. `storyboard.png`) y en Studio escribe su nombre
+en `storyboard.archivo`, junto con su `ancho` y `alto` en píxeles. Cada escena
+mostrará su panel nítido centrado sobre una copia desenfocada, con zoom
+lento, la narración y los subtítulos. Los recortes por defecto están
+estimados para una imagen de 900×1600; ajusta `storyboard.paneles` (x, y,
+ancho, alto de cada panel) hasta que encajen.
+
+Aviso: en el storyboard de referencia, los paneles 3, 5 y 7 muestran
+fachadas con letreros comerciales legibles. El brief prohíbe letreros y
+negocios específicos, así que ese material sirve como animatic interno pero
+debe sustituirse por renders referenciales sin rótulos antes de publicar.
+
 ## Guion y tiempos
 
 | Escena | Tiempo      | Texto en pantalla                                                                 | Diálogo |

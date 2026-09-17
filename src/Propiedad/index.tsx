@@ -1,5 +1,8 @@
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { Marca } from "./components/Marca";
+import { PanelStoryboard } from "./components/PanelStoryboard";
+import { SceneShell } from "./components/SceneShell";
+import { Subtitulos } from "./components/Subtitulo";
 import { Escena1 } from "./scenes/Escena1";
 import { Escena2 } from "./scenes/Escena2";
 import { Escena3 } from "./scenes/Escena3";
@@ -24,20 +27,32 @@ const ESCENAS = [
 ] as const;
 
 // Video promocional vertical 9:16, 45 s, 8 escenas contiguas.
-export const PropiedadCerroColorado: React.FC<PropiedadProps> = (props) => (
-  <AbsoluteFill style={{ backgroundColor: theme.bg }}>
-    {props.voz ? <Audio src={staticFile(props.voz)} /> : null}
-    {ESCENAS.map(({ key, C }) => (
-      <Sequence
-        key={key}
-        name={`Escena ${key.slice(1)}`}
-        from={SCENES[key].from}
-        durationInFrames={SCENES[key].duration}
-        premountFor={30}
-      >
-        <C {...props} />
-      </Sequence>
-    ))}
-    <Marca asesora={props.asesora} ubicacion={props.ubicacion} />
-  </AbsoluteFill>
-);
+// Con `storyboard.archivo` definido se muestra el panel correspondiente de la
+// imagen de storyboard en lugar de la escena diseñada (modo animatic).
+export const PropiedadCerroColorado: React.FC<PropiedadProps> = (props) => {
+  const usarStoryboard = props.storyboard.archivo !== null;
+  return (
+    <AbsoluteFill style={{ backgroundColor: theme.bg }}>
+      {props.voz ? <Audio src={staticFile(props.voz)} /> : null}
+      {ESCENAS.map(({ key, C }, i) => (
+        <Sequence
+          key={key}
+          name={`Escena ${key.slice(1)}`}
+          from={SCENES[key].from}
+          durationInFrames={SCENES[key].duration}
+          premountFor={30}
+        >
+          {usarStoryboard ? (
+            <SceneShell>
+              <PanelStoryboard storyboard={props.storyboard} indice={i} />
+            </SceneShell>
+          ) : (
+            <C {...props} />
+          )}
+        </Sequence>
+      ))}
+      {props.mostrarSubtitulos ? <Subtitulos /> : null}
+      <Marca asesora={props.asesora} ubicacion={props.ubicacion} />
+    </AbsoluteFill>
+  );
+};

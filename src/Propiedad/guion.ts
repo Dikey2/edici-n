@@ -1,8 +1,21 @@
-// Diálogo de la asesora por escena. Se usa para los subtítulos.
-export const DIALOGO = {
-  s1: "Si estás buscando una propiedad con una ubicación estratégica en Cerro Colorado, quiero mostrarte esta oportunidad.",
-  s5: "La tasación consigna zonificación de Comercio Especializado, lo que permite evaluar distintas posibilidades para un proyecto.",
-  s7: "Si eres empresario, inversionista o estás buscando un espacio para desarrollar tu próximo proyecto, esta propiedad merece ser conocida.",
-  s8: (asesora: string, whatsapp: string) =>
-    `Soy ${asesora}. Escríbeme al ${whatsapp} y coordinamos una visita.`,
-} as const;
+import guion from "../../narracion/guion.json";
+import tiempos from "../../narracion/tiempos.json";
+
+export type LineaGuion = {
+  readonly id: number;
+  readonly subtitulo: string;
+  // Ventana real de la voz (segundos), escrita por scripts/narracion.py.
+  readonly inicio: number;
+  readonly fin: number;
+};
+
+// Une el texto del guion con los tiempos medidos de la narración.
+export const LINEAS: LineaGuion[] = guion.escenas.map((e) => {
+  const t = tiempos.find((x) => x.id === e.id);
+  return {
+    id: e.id,
+    subtitulo: e.subtitulo,
+    inicio: t ? t.inicio : e.inicio,
+    fin: t ? t.fin : e.fin,
+  };
+});

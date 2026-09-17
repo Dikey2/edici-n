@@ -2,13 +2,11 @@ import { AbsoluteFill, Sequence } from "remotion";
 import { MediaSlot } from "../components/MediaSlot";
 import { Referencial } from "../components/Referencial";
 import { SceneShell } from "../components/SceneShell";
-import { Subtitulo } from "../components/Subtitulo";
 import { Pildora, Titulo } from "../components/Texto";
-import { DIALOGO } from "../guion";
 import type { PropiedadProps } from "../schema";
 
 // 0:21 – 0:27  Asesora a cámara, alternando con render referencial.
-export const Escena5: React.FC<PropiedadProps> = ({ clips, mostrarSubtitulos }) => (
+export const Escena5: React.FC<PropiedadProps> = ({ clips }) => (
   <SceneShell>
     <Sequence durationInFrames={100} premountFor={30}>
       <MediaSlot src={clips.presentadoraZonificacion} kind="presentadora" etiqueta="presentadora_zonificacion.mp4" />
@@ -23,6 +21,5 @@ export const Escena5: React.FC<PropiedadProps> = ({ clips, mostrarSubtitulos }) 
         Comercio especializado
       </Titulo>
     </AbsoluteFill>
-    {mostrarSubtitulos ? <Subtitulo texto={DIALOGO.s5} /> : null}
   </SceneShell>
 );

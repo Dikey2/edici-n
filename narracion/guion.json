@@ -1,0 +1,61 @@
+{
+  "fps": 30,
+  "escenas": [
+    {
+      "id": 1,
+      "inicio": 0.0,
+      "fin": 5.0,
+      "subtitulo": "Si estás buscando una propiedad con una ubicación estratégica en Cerro Colorado, quiero mostrarte esta oportunidad.",
+      "tts": "Si estás buscando una propiedad con una ubicación estratégica en Cerro Colorado, quiero mostrarte esta oportunidad."
+    },
+    {
+      "id": 2,
+      "inicio": 5.0,
+      "fin": 10.0,
+      "subtitulo": "411.45 m² en esquina, con frente directo a la Autopista Arequipa – La Joya.",
+      "tts": "Cuatrocientos once metros cuadrados en esquina, con frente directo a la Autopista Arequipa, La Joya."
+    },
+    {
+      "id": 3,
+      "inicio": 10.0,
+      "fin": 15.0,
+      "subtitulo": "Con construcción existente y 411.45 m² de área techada.",
+      "tts": "Con construcción existente y la misma área techada."
+    },
+    {
+      "id": 4,
+      "inicio": 15.0,
+      "fin": 21.0,
+      "subtitulo": "Con agua, luz, desagüe, pistas asfaltadas, veredas y telefonía.",
+      "tts": "Con agua, luz, desagüe, pistas asfaltadas, veredas y telefonía."
+    },
+    {
+      "id": 5,
+      "inicio": 21.0,
+      "fin": 27.0,
+      "subtitulo": "La tasación consigna zonificación de Comercio Especializado, lo que permite evaluar distintas posibilidades para un proyecto.",
+      "tts": "La tasación consigna zonificación de Comercio Especializado, lo que permite evaluar distintas posibilidades para un proyecto."
+    },
+    {
+      "id": 6,
+      "inicio": 27.0,
+      "fin": 33.0,
+      "subtitulo": "Además, cuenta con documentación registral.",
+      "tts": "Además, cuenta con documentación registral."
+    },
+    {
+      "id": 7,
+      "inicio": 33.0,
+      "fin": 39.0,
+      "subtitulo": "Si eres empresario, inversionista o estás buscando un espacio para desarrollar tu próximo proyecto, esta propiedad merece ser conocida.",
+      "tts": "Si eres empresario, inversionista o estás buscando un espacio para desarrollar tu próximo proyecto, esta propiedad merece ser conocida."
+    },
+    {
+      "id": 8,
+      "inicio": 39.0,
+      "fin": 45.0,
+      "subtitulo": "Soy Gianela Torres. Escríbeme al 978 308 489 y coordinamos una visita.",
+      "tts": "Soy Gianela Torres. Escríbeme al nueve siete ocho, tres cero ocho, cuatro ocho nueve, y coordinamos una visita."
+    }
+  ]
+}
