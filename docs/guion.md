@@ -90,13 +90,21 @@ Las frases obligatorias del brief (escenas 1, 5, 7 y 8) se mantienen
 literales; las demás solo leen lo que ya aparece en pantalla. Ninguna añade
 usos, cifras ni datos no proporcionados.
 
+## Música de fondo (opcional)
+
+Si guardas `public/musica.mp3` (pista libre de derechos, 45 s o más), el
+video la mezcla automáticamente a bajo volumen bajo la narración.
+
 ## Modo storyboard (animatic)
 
 Si tienes la imagen de storyboard (8 paneles en 2 columnas × 4 filas),
 guárdala como `public/storyboard.jpg` (o `.png`) y el video la usará automáticamente
 (si su tamaño no es 900×1600, ajusta `ancho` y `alto` en Studio). Cada escena
-mostrará su panel nítido centrado sobre una copia desenfocada, con zoom
-lento, la narración y los subtítulos. Los recortes por defecto están
+muestra su panel como tarjeta con entrada animada (deslizamiento, giro 3D o
+zoom, alternando por escena), cámara con zoom y paneo, destello de luz,
+palabras clave animadas en la franja superior, subtítulos por bloques de
+palabras sincronizados con la voz y una cinta inferior en movimiento con la
+marca. Los recortes por defecto están
 estimados para una imagen de 900×1600; ajusta `storyboard.paneles` (x, y,
 ancho, alto de cada panel) hasta que encajen.
 

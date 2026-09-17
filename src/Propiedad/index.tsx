@@ -1,7 +1,8 @@
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { siExiste } from "./archivos";
+import { Callouts } from "./components/Callouts";
 import { Footer } from "./components/Footer";
-import { PanelStoryboard } from "./components/PanelStoryboard";
+import { type Entrada, PanelStoryboard } from "./components/PanelStoryboard";
 import { Referencial } from "./components/Referencial";
 import { SceneShell } from "./components/SceneShell";
 import { Subtitulos } from "./components/Subtitulo";
@@ -18,21 +19,22 @@ import { SCENES } from "./timings";
 import { theme } from "./theme";
 
 const ESCENAS = [
-  { key: "s1", C: Escena1 },
-  { key: "s2", C: Escena2 },
-  { key: "s3", C: Escena3 },
-  { key: "s4", C: Escena4 },
-  { key: "s5", C: Escena5 },
-  { key: "s6", C: Escena6 },
-  { key: "s7", C: Escena7 },
-  { key: "s8", C: Escena8 },
-] as const;
+  { key: "s1", C: Escena1, entrada: "zoom" },
+  { key: "s2", C: Escena2, entrada: "derecha" },
+  { key: "s3", C: Escena3, entrada: "izquierda" },
+  { key: "s4", C: Escena4, entrada: "abajo" },
+  { key: "s5", C: Escena5, entrada: "derecha" },
+  { key: "s6", C: Escena6, entrada: "izquierda" },
+  { key: "s7", C: Escena7, entrada: "abajo" },
+  { key: "s8", C: Escena8, entrada: "zoom" },
+] as const satisfies ReadonlyArray<{ key: keyof typeof SCENES; C: React.FC<PropiedadProps>; entrada: Entrada }>;
 
-// Video promocional vertical 9:16, 45 s, 8 escenas contiguas.
 // Paneles del storyboard que son renders/fachadas: llevan aviso referencial.
 const PANELES_REFERENCIALES = new Set([2, 4, 6]);
-// Escenas cuyo diálogo ya está escrito en pantalla (también en el storyboard).
+// Escenas cuyo diálogo ya está escrito en pantalla (solo en las escenas diseñadas).
 const SIN_SUBTITULO = new Set([5, 7]);
+// Cuadros en que la escena entrante se solapa con la saliente.
+const SOLAPE = 10;
 
 // Si la imagen de storyboard existe en /public se muestra el panel
 // correspondiente en lugar de la escena diseñada (modo animatic).
@@ -42,28 +44,36 @@ export const PropiedadCerroColorado: React.FC<PropiedadProps> = (props) => {
   const archivoStoryboard = siExiste(props.storyboard.archivo) ?? siExiste(alterno);
   const usarStoryboard = archivoStoryboard !== null;
   const storyboard = { ...props.storyboard, archivo: archivoStoryboard };
+  const musica = siExiste("musica.mp3");
   return (
     <AbsoluteFill style={{ backgroundColor: theme.bg }}>
       {siExiste(props.voz) ? <Audio src={staticFile(props.voz as string)} /> : null}
-      {ESCENAS.map(({ key, C }, i) => (
-        <Sequence
-          key={key}
-          name={`Escena ${key.slice(1)}`}
-          from={SCENES[key].from}
-          durationInFrames={SCENES[key].duration}
-          premountFor={30}
-        >
-          {usarStoryboard ? (
-            <SceneShell>
-              <PanelStoryboard storyboard={storyboard} indice={i} />
-              {PANELES_REFERENCIALES.has(i) ? <Referencial /> : null}
-            </SceneShell>
-          ) : (
-            <C {...props} />
-          )}
-        </Sequence>
-      ))}
-      {props.mostrarSubtitulos ? <Subtitulos ocultarEn={SIN_SUBTITULO} /> : null}
+      {musica ? <Audio src={staticFile(musica)} volume={0.14} /> : null}
+      {ESCENAS.map(({ key, C, entrada }, i) => {
+        const solapeIni = i === 0 ? 0 : SOLAPE;
+        return (
+          <Sequence
+            key={key}
+            name={`Escena ${key.slice(1)}`}
+            from={SCENES[key].from - solapeIni}
+            durationInFrames={SCENES[key].duration + solapeIni}
+            premountFor={30}
+          >
+            {usarStoryboard ? (
+              <SceneShell>
+                <PanelStoryboard storyboard={storyboard} indice={i} entrada={entrada} />
+                <div style={{ position: "absolute", left: 50, right: 50, top: 46, height: 300, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+                  <Callouts indice={i} props={props} />
+                </div>
+                {PANELES_REFERENCIALES.has(i) ? <Referencial /> : null}
+              </SceneShell>
+            ) : (
+              <C {...props} />
+            )}
+          </Sequence>
+        );
+      })}
+      {props.mostrarSubtitulos ? <Subtitulos ocultarEn={usarStoryboard ? undefined : SIN_SUBTITULO} /> : null}
       <Footer />
     </AbsoluteFill>
   );
