@@ -17,24 +17,31 @@ son **props** editables desde Studio (o con `--props`), sin tocar código.
 ## Material que debe generarse con IA (tomas, presentadora y voz)
 
 Remotion arma la pieza; las tomas realistas y la voz se generan con una
-herramienta de video/voz generativa usando el prompt maestro. Guarda cada
-archivo en `public/` y escribe su nombre en la prop correspondiente. Mientras
-un clip no exista, se muestra un marcador de posición con la etiqueta
-`CLIP PENDIENTE`.
+herramienta de video/voz generativa usando el prompt maestro. **Basta con
+copiar cada archivo a `public/` con el nombre de la tabla**: el video detecta
+qué archivos existen y los usa; mientras un clip no exista se muestra un
+marcador de posición con la etiqueta `CLIP PENDIENTE`. Si prefieres otro
+nombre, cámbialo en la prop correspondiente desde Studio.
 
-| Prop (`clips.*`)            | Escena | Duración mín. | Contenido                                                      |
-|-----------------------------|--------|---------------|----------------------------------------------------------------|
-| `dronIntro`                 | 1      | 3.2 s         | Aérea cinematográfica de Cerro Colorado con el Misti al fondo  |
-| `presentadoraIntro`         | 1      | 1.8 s         | Asesora a cámara, plano medio, breve                           |
-| `dronZona`                  | 2      | 5 s           | Aérea tipo dron de la zona junto a la vía principal            |
-| `renderEsquina`             | 3      | 5 s           | Render referencial de local comercial en esquina                |
-| `presentadoraZonificacion`  | 5      | 3.3 s         | Asesora hablando a cámara                                       |
-| `renderProyecto`            | 5      | 2.7 s         | Render referencial de posible proyecto comercial                |
-| `presentadoraLlamado`       | 7      | 6 s           | Asesora caminando / hablando en entorno inmobiliario moderno    |
-| `renderLlamado`             | 7      | 1.7 s         | Render referencial breve                                        |
-| `atardecer`                 | 8      | 2.7 s         | Vista cinematográfica de Cerro Colorado al atardecer            |
-| `presentadoraCierre`        | 8      | 3.3 s         | Asesora en plano medio, cierre                                  |
-| `voz` (prop raíz)           | todas  | 45 s          | Narración completa sincronizada a los tiempos de abajo          |
+| Archivo en `public/`            | Prop (`clips.*`)           | Escena | Duración mín. | Contenido                                                     |
+|---------------------------------|----------------------------|--------|---------------|---------------------------------------------------------------|
+| `dron_intro.mp4`                | `dronIntro`                | 1      | 3.2 s         | Aérea cinematográfica de Cerro Colorado con el Misti al fondo |
+| `presentadora_intro.mp4`        | `presentadoraIntro`        | 1      | 1.8 s         | Asesora a cámara, plano medio, breve                          |
+| `dron_zona.mp4`                 | `dronZona`                 | 2      | 5 s           | Aérea tipo dron de la zona junto a la vía principal           |
+| `render_esquina.mp4`            | `renderEsquina`            | 3      | 5 s           | Render referencial de local comercial en esquina              |
+| `presentadora_zonificacion.mp4` | `presentadoraZonificacion` | 5      | 3.3 s         | Asesora hablando a cámara                                     |
+| `render_proyecto.mp4`           | `renderProyecto`           | 5      | 2.7 s         | Render referencial de posible proyecto comercial              |
+| `presentadora_llamado.mp4`      | `presentadoraLlamado`      | 7      | 6 s           | Asesora caminando / hablando en entorno inmobiliario moderno  |
+| `render_llamado.mp4`            | `renderLlamado`            | 7      | 1.7 s         | Render referencial breve                                      |
+| `atardecer.mp4`                 | `atardecer`                | 8      | 2.7 s         | Vista cinematográfica de Cerro Colorado al atardecer          |
+| `presentadora_cierre.mp4`       | `presentadoraCierre`       | 8      | 3.3 s         | Asesora en plano medio, cierre                                |
+| `narracion.mp3`                 | `voz` (prop raíz)          | todas  | 45 s          | Narración completa sincronizada a los tiempos de abajo        |
+
+Las imágenes fijas (`.png`, `.jpg`) también sirven en cualquier ranura: se
+muestran a pantalla completa con un zoom lento. Si tienes las 8 imágenes del
+storyboard por separado y en alta resolución, guárdalas en `public/` y escribe
+sus nombres (por ejemplo `escena1.png`) en las props `clips.*` desde Studio;
+es la opción de mejor calidad.
 
 Formatos aceptados: `.mp4`, `.webm`, `.mov` (video) o `.png`, `.jpg` (imagen fija
 con movimiento lento). Los clips se reproducen sin audio; la voz va en `voz`.
@@ -85,8 +92,8 @@ usos, cifras ni datos no proporcionados.
 ## Modo storyboard (animatic)
 
 Si tienes la imagen de storyboard (8 paneles en 2 columnas × 4 filas),
-guárdala en `public/` (p. ej. `storyboard.png`) y en Studio escribe su nombre
-en `storyboard.archivo`, junto con su `ancho` y `alto` en píxeles. Cada escena
+guárdala como `public/storyboard.png` y el video la usará automáticamente
+(si su tamaño no es 900×1600, ajusta `ancho` y `alto` en Studio). Cada escena
 mostrará su panel nítido centrado sobre una copia desenfocada, con zoom
 lento, la narración y los subtítulos. Los recortes por defecto están
 estimados para una imagen de 900×1600; ajusta `storyboard.paneles` (x, y,

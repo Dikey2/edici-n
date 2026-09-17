@@ -7,6 +7,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { siExiste } from "../archivos";
 import { theme } from "../theme";
 
 type Kind = "dron" | "presentadora" | "render" | "atardecer";
@@ -25,7 +26,7 @@ const esVideo = (f: string) => /\.(mp4|webm|mov|m4v)$/i.test(f);
 // si aún no existe, un marcador de posición estilizado con el nombre del
 // archivo esperado. Aplica un lento movimiento tipo Ken Burns.
 export const MediaSlot: React.FC<Props> = ({
-  src,
+  src: srcProp,
   kind,
   etiqueta,
   zoom = true,
@@ -34,6 +35,8 @@ export const MediaSlot: React.FC<Props> = ({
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const scale = zoom ? interpolate(frame, [0, durationInFrames], [1, 1.08]) : 1;
+  // Si el archivo indicado no está en /public, se usa el marcador.
+  const src = siExiste(srcProp);
 
   return (
     <AbsoluteFill>

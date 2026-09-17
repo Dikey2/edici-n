@@ -1,6 +1,8 @@
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
+import { siExiste } from "./archivos";
 import { Marca } from "./components/Marca";
 import { PanelStoryboard } from "./components/PanelStoryboard";
+import { Referencial } from "./components/Referencial";
 import { SceneShell } from "./components/SceneShell";
 import { Subtitulos } from "./components/Subtitulo";
 import { Escena1 } from "./scenes/Escena1";
@@ -27,13 +29,18 @@ const ESCENAS = [
 ] as const;
 
 // Video promocional vertical 9:16, 45 s, 8 escenas contiguas.
-// Con `storyboard.archivo` definido se muestra el panel correspondiente de la
-// imagen de storyboard en lugar de la escena diseñada (modo animatic).
+// Paneles del storyboard que son renders/fachadas: llevan aviso referencial.
+const PANELES_REFERENCIALES = new Set([2, 4, 6]);
+
+// Si la imagen de storyboard existe en /public se muestra el panel
+// correspondiente en lugar de la escena diseñada (modo animatic).
 export const PropiedadCerroColorado: React.FC<PropiedadProps> = (props) => {
-  const usarStoryboard = props.storyboard.archivo !== null;
+  const archivoStoryboard = siExiste(props.storyboard.archivo);
+  const usarStoryboard = archivoStoryboard !== null;
+  const storyboard = { ...props.storyboard, archivo: archivoStoryboard };
   return (
     <AbsoluteFill style={{ backgroundColor: theme.bg }}>
-      {props.voz ? <Audio src={staticFile(props.voz)} /> : null}
+      {siExiste(props.voz) ? <Audio src={staticFile(props.voz as string)} /> : null}
       {ESCENAS.map(({ key, C }, i) => (
         <Sequence
           key={key}
@@ -44,7 +51,8 @@ export const PropiedadCerroColorado: React.FC<PropiedadProps> = (props) => {
         >
           {usarStoryboard ? (
             <SceneShell>
-              <PanelStoryboard storyboard={props.storyboard} indice={i} />
+              <PanelStoryboard storyboard={storyboard} indice={i} />
+              {PANELES_REFERENCIALES.has(i) ? <Referencial /> : null}
             </SceneShell>
           ) : (
             <C {...props} />

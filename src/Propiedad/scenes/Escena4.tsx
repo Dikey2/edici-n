@@ -13,14 +13,14 @@ export const Escena4: React.FC<PropiedadProps> = () => (
         background: `radial-gradient(120% 70% at 50% 0%, ${theme.blueDeep} 0%, ${theme.bg} 60%)`,
       }}
     />
-    <AbsoluteFill style={{ padding: "180px 70px 0", gap: 36 }}>
+    <AbsoluteFill style={{ padding: "150px 70px 0", gap: 28 }}>
       <Titulo delay={4} size={72}>
         Servicios disponibles
       </Titulo>
       <Linea delay={12} size={36} color={theme.muted}>
         Agua · Luz · Desagüe · Pistas asfaltadas · Veredas · Telefonía
       </Linea>
-      <div style={{ marginTop: 30 }}>
+      <div style={{ marginTop: 10 }}>
         <Servicios />
       </div>
       <Linea delay={60} size={34} color={theme.text} align="center">

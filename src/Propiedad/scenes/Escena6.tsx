@@ -21,8 +21,8 @@ export const Escena6: React.FC<PropiedadProps> = () => (
         Cuenta con documentación registral.
       </Linea>
     </AbsoluteFill>
-    <AbsoluteFill style={{ justifyContent: "flex-end", paddingBottom: 140 }}>
-      <div style={{ height: 1000 }}>
+    <AbsoluteFill style={{ justifyContent: "flex-end", paddingBottom: 340 }}>
+      <div style={{ height: 900 }}>
         <Documentos />
       </div>
     </AbsoluteFill>

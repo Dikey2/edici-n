@@ -10,7 +10,7 @@ export const Escena3: React.FC<PropiedadProps> = ({ clips, areaTechada }) => (
   <SceneShell>
     <MediaSlot src={clips.renderEsquina} kind="render" etiqueta="render_esquina.mp4" oscurecer={0.5} />
     <Referencial />
-    <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 70px 260px", gap: 28 }}>
+    <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 70px 400px", gap: 28 }}>
       <Titulo delay={8} size={72}>
         Construcción existente
       </Titulo>

@@ -18,8 +18,8 @@ export const Escena2: React.FC<PropiedadProps> = ({ clips, areaTerreno, via }) =
         Frente directo a la {via}
       </Linea>
     </AbsoluteFill>
-    <AbsoluteFill style={{ justifyContent: "flex-end", paddingBottom: 120 }}>
-      <div style={{ height: 900 }}>
+    <AbsoluteFill style={{ justifyContent: "flex-end", paddingBottom: 340 }}>
+      <div style={{ height: 820 }}>
         <Ubicacion via={via} />
       </div>
     </AbsoluteFill>

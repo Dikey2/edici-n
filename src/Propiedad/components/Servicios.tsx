@@ -87,7 +87,7 @@ export const Servicios: React.FC = () => {
               flexDirection: "column",
               alignItems: "center",
               gap: 14,
-              padding: "38px 20px",
+              padding: "26px 20px",
               borderRadius: 24,
               background: "rgba(255,255,255,0.06)",
               border: "1px solid rgba(255,255,255,0.12)",
@@ -95,8 +95,8 @@ export const Servicios: React.FC = () => {
           >
             <div
               style={{
-                width: 130,
-                height: 130,
+                width: 110,
+                height: 110,
                 borderRadius: 999,
                 display: "grid",
                 placeItems: "center",
