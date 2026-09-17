@@ -51,19 +51,19 @@ export const defaultProps: PropiedadProps = {
   mostrarSubtitulos: true,
   voz: "narracion.mp3",
   storyboard: {
-    archivo: "storyboard.png",
+    archivo: "storyboard.jpg",
     ancho: 900,
     alto: 1600,
-    // Estimación para la imagen de referencia de 900×1600; ajústalo en Studio.
+    // Recortes medidos sobre la imagen de storyboard de 900×1600.
     paneles: [
-      { x: 0, y: 0, w: 447, h: 420 },
-      { x: 453, y: 0, w: 447, h: 420 },
-      { x: 0, y: 428, w: 447, h: 347 },
-      { x: 453, y: 428, w: 447, h: 347 },
-      { x: 0, y: 783, w: 447, h: 314 },
-      { x: 453, y: 783, w: 447, h: 314 },
-      { x: 0, y: 1105, w: 447, h: 350 },
-      { x: 453, y: 1105, w: 447, h: 350 },
+      { x: 0, y: 0, w: 450, h: 419 },
+      { x: 454, y: 0, w: 446, h: 419 },
+      { x: 0, y: 423, w: 450, h: 350 },
+      { x: 454, y: 423, w: 446, h: 350 },
+      { x: 0, y: 778, w: 450, h: 314 },
+      { x: 454, y: 778, w: 446, h: 314 },
+      { x: 0, y: 1096, w: 450, h: 356 },
+      { x: 454, y: 1096, w: 446, h: 356 },
     ],
   },
   clips: {

@@ -1,6 +1,10 @@
 import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import type { PropiedadProps } from "../schema";
 
+// Zona del sello de tiempo impreso en cada panel (coordenadas del panel) y
+// desplazamiento desde donde se clona el fondo para taparlo.
+const PARCHE = { x: 8, y: 8, w: 112, h: 46, dx: 118 };
+
 type Props = {
   readonly storyboard: PropiedadProps["storyboard"];
   readonly indice: number; // 0–7
@@ -35,6 +39,31 @@ export const PanelStoryboard: React.FC<Props> = ({ storyboard, indice }) => {
           maxWidth: "none",
         }}
       />
+      {/* Parche que tapa el sello de tiempo con el fondo contiguo */}
+      <div
+        style={{
+          position: "absolute",
+          left: PARCHE.x * e,
+          top: PARCHE.y * e,
+          width: PARCHE.w * e,
+          height: PARCHE.h * e,
+          overflow: "hidden",
+          borderRadius: 10 * e,
+        }}
+      >
+        <Img
+          src={src}
+          style={{
+            position: "absolute",
+            width: ancho * e,
+            height: alto * e,
+            left: -(p.x + PARCHE.x + PARCHE.dx) * e,
+            top: -(p.y + PARCHE.y) * e,
+            maxWidth: "none",
+            filter: "blur(1.5px)",
+          }}
+        />
+      </div>
     </div>
   );
 

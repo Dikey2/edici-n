@@ -93,7 +93,7 @@ usos, cifras ni datos no proporcionados.
 ## Modo storyboard (animatic)
 
 Si tienes la imagen de storyboard (8 paneles en 2 columnas × 4 filas),
-guárdala como `public/storyboard.png` y el video la usará automáticamente
+guárdala como `public/storyboard.jpg` (o `.png`) y el video la usará automáticamente
 (si su tamaño no es 900×1600, ajusta `ancho` y `alto` en Studio). Cada escena
 mostrará su panel nítido centrado sobre una copia desenfocada, con zoom
 lento, la narración y los subtítulos. Los recortes por defecto están
